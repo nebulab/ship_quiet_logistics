@@ -1,8 +1,7 @@
 require 'spec_helper'
 
-module Documents
+module ShipQuietLogistics::Documents
   describe RMA do
-
     describe '#to_xml' do
       it 'should convert to rma document' do
         shipment = Factories.shipment

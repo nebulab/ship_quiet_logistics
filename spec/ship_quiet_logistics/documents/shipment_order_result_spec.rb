@@ -1,8 +1,7 @@
 require 'spec_helper'
 
-module Documents
+module ShipQuietLogistics::Documents
   describe ShipmentOrderResult do
-
     it 'should convert a document to a hash' do
       xml = <<-XML
         <?xml version="1.0" encoding="utf-8"?>
@@ -53,33 +52,33 @@ module Documents
       result = ShipmentOrderResult.new(xml)
 
       expect(result.to_h).to eq(
-        :id => "H13088556647",
-        :tracking => "1Z1111111111111111",
-        :warehouse => "DVN",
-        :status => "shipped",
-        :business_unit => "BONOBOS",
-        :shipped_at => "2015-02-24T15:51:31.0953088Z",
+        :id => 'H13088556647',
+        :tracking => '1Z1111111111111111',
+        :warehouse => 'DVN',
+        :status => 'shipped',
+        :business_unit => 'BONOBOS',
+        :shipped_at => '2015-02-24T15:51:31.0953088Z',
         :cartons => [
           {
-            :id => "S11111111",
-            :tracking => "1Z1111111111111111",
+            :id => 'S11111111',
+            :tracking => '1Z1111111111111111',
             :line_items => [
               {
-                :ql_item_number => "1111111",
+                :ql_item_number => '1111111',
                 :quantity => 1,
               },
               {
-                :ql_item_number => "2222222",
+                :ql_item_number => '2222222',
                 :quantity => 1,
               },
             ],
           },
           {
-            :id => "S22222222",
-            :tracking => "1Z2222222222222222",
+            :id => 'S22222222',
+            :tracking => '1Z2222222222222222',
             :line_items => [
               {
-                :ql_item_number => "3333333",
+                :ql_item_number => '3333333',
                 :quantity => 1,
               },
             ],

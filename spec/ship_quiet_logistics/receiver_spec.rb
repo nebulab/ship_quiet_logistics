@@ -1,9 +1,7 @@
 require 'spec_helper'
 
-describe Receiver do
-  subject { Receiver.new('mock_spree_queue') }
+describe ShipQuietLogistics::Receiver do
+  # TODO: There was only a pending spec here, nothing in it
 
-  xit 'only returns necessary messages' do
-
-  end
+  it 'should have extensive test coverage'
 end

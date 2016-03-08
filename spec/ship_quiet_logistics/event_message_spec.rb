@@ -1,9 +1,11 @@
 require 'spec_helper'
 
-describe EventMessage do
+describe ShipQuietLogistics::EventMessage do
+  subject(:xml) do
+    described_class.new('ShipmentOrder', 'test.xml', '').to_xml
+  end
 
   it 'converts to xml' do
-    xml = EventMessage.new('ShipmentOrder', 'test.xml', '').to_xml
-    xml.should match /EventMessage/
+    expect(xml).to match /EventMessage/
   end
 end

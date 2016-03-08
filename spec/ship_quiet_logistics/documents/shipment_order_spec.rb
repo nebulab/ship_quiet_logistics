@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Documents
+module ShipQuietLogistics::Documents
   describe ShipmentOrder do
     let(:shipment) { Factories.transfer_order_shipment }
 

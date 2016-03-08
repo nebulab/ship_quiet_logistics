@@ -1,3 +1,6 @@
+require 'aws-sdk'
+require 'nokogiri'
+
 require 'ship_quiet_logistics/version'
 require 'ship_quiet_logistics/api'
 require 'ship_quiet_logistics/documents'
