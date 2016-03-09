@@ -33,6 +33,8 @@ ENV['QUIET_OUTGOING_QUEUE']
 ENV['QUIET_OUTGOING_BUCKET']
 ```
 
+Additionnaly Quiet Logistics requires a Business Unit and a Client ID
+
 ## Usage
 
 TODO: Write usage instructions here
