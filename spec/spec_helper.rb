@@ -27,9 +27,6 @@ ShipQuietLogistics.configure do |config|
   config.client_id        = ENV['CLIENT_ID']
 end
 
-AWS.config(access_key_id: ENV['AMAZON_ACCESS_KEY'],
-           secret_access_key: ENV['AMAZON_SECRET_KEY'])
-
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 

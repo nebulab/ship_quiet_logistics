@@ -15,6 +15,9 @@ require 'ship_quiet_logistics/sender'
 require 'ship_quiet_logistics/uploader'
 require 'ship_quiet_logistics/version'
 
+AWS.config(access_key_id: ENV['AMAZON_ACCESS_KEY'],
+           secret_access_key: ENV['AMAZON_SECRET_KEY'])
+
 module ShipQuietLogistics
   def self.send_shipment(shipment)
     Commands::SendShipment.(shipment)
