@@ -5,8 +5,10 @@ module ShipQuietLogistics
     end
 
     def process_doc(msg)
-      name = msg['document_name']
-      type = msg['document_type']
+      name = msg[:document_name]
+      type = msg[:document_type]
+
+      return if type == 'error'
 
       if type == 'InventoryEventMessage'
         data = msg

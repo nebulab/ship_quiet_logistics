@@ -17,4 +17,17 @@ describe ShipQuietLogistics do
       send_shipment!
     end
   end
+
+  context 'getting a shipments result' do
+    let(:shipment) { double(:shipment) }
+    let(:command) { ShipQuietLogistics::Commands::ProcessShipments }
+
+    subject(:process_shipments!) { described_class.process_shipments }
+
+    it 'processes the shipments' do
+      expect(command).to receive(:call)
+
+      process_shipments!
+    end
+  end
 end

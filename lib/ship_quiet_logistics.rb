@@ -24,6 +24,10 @@ module ShipQuietLogistics
     Commands::SendShipment.(shipment)
   end
 
+  def self.process_shipments
+    Commands::ProcessShipments.()
+  end
+
   class << self
     attr_accessor :configuration
   end
@@ -37,6 +41,8 @@ module ShipQuietLogistics
   class Configuration
     attr_accessor :outgoing_bucket,
                   :outgoing_queue,
+                  :incoming_bucket,
+                  :incoming_queue,
                   :business_unit,
                   :client_id
   end
