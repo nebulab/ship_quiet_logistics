@@ -1,33 +1,51 @@
 module ShipQuietLogistics
   module Commands
     class ProcessShipments
-      def self.call
-        new.call
+      def self.call(blackboard:, queue:)
+        new(blackboard, queue).()
       end
 
-      def initialize
+      def initialize(blackboard, queue)
+        @blackboard = blackboard
+        @queue = queue
+
         @config = ShipQuietLogistics.configuration
       end
 
       def call
-        receiver = Receiver.new(queue)
-        receiver.receive_messages do |message|
-          content = Processor.new(bucket).process_doc(message)
-        end
+        messages_count.times do
+          document = next_document
+          next if document.nil?
 
-        # do something with the content
+          update_shipment(document)
+        end
       end
 
       private
 
-      attr_reader :config
+      attr_reader :blackboard, :queue, :config
 
-      def queue
-        config.incoming_queue
+      def update_shipment(document)
+        shipment = find_shipment(document)
+
+        shipment.ship!
+        shipment.update(tracking: document.tracking_number)
       end
 
-      def bucket
-        config.incoming_bucket
+      def find_shipment(document)
+        Spree::Shipment.find_by(number: document.order_number)
+      end
+
+      def next_message
+        queue.receive
+      end
+
+      def next_document
+        blackboard.fetch(next_message)
+      end
+
+      def messages_count
+        queue.approximate_pending_messages
       end
     end
   end

@@ -26,9 +26,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'aws-sdk', '~> 1.66'
   spec.add_dependency 'nokogiri', '~> 1.6'
   spec.add_dependency 'spree_core', '~> 2.4'
+  spec.add_dependency 'hushed', '~> 0.0.9'
 
   spec.add_development_dependency 'bundler', '~> 1.11'
   spec.add_development_dependency 'database_cleaner', '~> 1.5'
