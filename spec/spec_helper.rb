@@ -1,5 +1,8 @@
 ENV['RAILS_ENV'] = 'test'
 
+require 'dotenv'
+Dotenv.load!
+
 begin
   require File.expand_path('../dummy/config/environment', __FILE__)
 rescue LoadError
@@ -7,16 +10,12 @@ rescue LoadError
   exit
 end
 
-require 'ship_quiet_logistics'
 require 'database_cleaner'
-require 'dotenv'
 require 'ffaker'
 require 'pry'
 require 'rspec/rails'
-
 require 'spree/testing_support/factories'
-
-Dotenv.load
+require 'timecop'
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
@@ -26,6 +25,8 @@ ShipQuietLogistics.configure do |config|
   config.business_unit    = ENV['BUSINESS_UNIT']
   config.client_id        = ENV['CLIENT_ID']
 end
+
+AWS.config(sqs_verify_checksums: false)
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
