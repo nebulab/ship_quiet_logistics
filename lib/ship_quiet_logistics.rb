@@ -17,8 +17,8 @@ require 'ship_quiet_logistics/sender'
 require 'ship_quiet_logistics/uploader'
 require 'ship_quiet_logistics/version'
 
-AWS.config(access_key_id: ENV['AMAZON_ACCESS_KEY'],
-           secret_access_key: ENV['AMAZON_SECRET_KEY'])
+AWS.config(access_key_id: ENV['QUIET_AWS_ACCESS_KEY'],
+           secret_access_key: ENV['QUIET_AWS_SECRET_KEY'])
 
 module ShipQuietLogistics
   def self.send_shipment(shipment)
@@ -48,7 +48,27 @@ module ShipQuietLogistics
                   :outgoing_queue,
                   :incoming_bucket,
                   :incoming_queue,
+                  :inventory_queue,
                   :business_unit,
                   :client_id
+
+    def credentials
+      {
+        access_key_id: ENV['QUIET_AWS_ACCESS_KEY'],
+        secret_access_key: ENV['QUIET_AWS_SECRET_KEY'],
+        client_id: client_id,
+        business_unit: business_unit,
+        warehouse: 'ALL',
+        buckets: {
+          to: outgoing_bucket,
+          from: incoming_bucket
+        },
+        queues: {
+          to: outgoing_queue,
+          from: incoming_queue,
+          inventory: inventory_queue
+        }
+      }
+    end
   end
 end
