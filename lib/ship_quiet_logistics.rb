@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'spree_core'
 
 require 'ship_quiet_logistics/version'
+require 'ship_quiet_logistics/engine'
 require 'ship_quiet_logistics/api'
 require 'ship_quiet_logistics/documents'
 require 'ship_quiet_logistics/commands'
