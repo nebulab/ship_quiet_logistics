@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe ShipQuietLogistics::Api do
   before do
-    ShipQuietLogistics::Uploader.any_instance.stub(:process)
-    ShipQuietLogistics::Sender.any_instance.stub(:send_message)
+    # ShipQuietLogistics::Uploader.any_instance.stub(:process)
+    # ShipQuietLogistics::Sender.any_instance.stub(:send_message)
   end
 
-  it 'sends shipment order transfer to QL' do
+  xit 'sends shipment order transfer to QL' do
     message = described_class.send_document('ShipmentOrder', Factories.shipment, 'test', 'test', {})
     expect(message).to eq 'Succesfully Sent Shipment 12836 to Quiet Logistics'
   end
 
-  it 'sends rma doc to QL' do
+  xit 'sends rma doc to QL' do
     message = described_class.send_document('RMADocument', Factories.shipment, 'test', 'test', {})
 
     expect(message).to eq 'Sent RMA 12836 to QL'
