@@ -4,7 +4,7 @@ module ShipQuietLogistics
   module Commands
     describe SendShipment do
       describe '.call' do
-        let(:shipment) { double(:shipment) }
+        let(:shipment) { create(:shipment) }
         let(:api) { ShipQuietLogistics::Api }
 
         subject(:send_shipment!) { described_class.call(shipment) }
@@ -24,9 +24,17 @@ module ShipQuietLogistics
         end
 
         it 'calls into the api with shipment' do
-          expect(api).to receive('send_document').with *params
+          expect(api).to receive(:send_document).with *params
 
           send_shipment!
+        end
+
+        it 'marks the shipment pushed' do
+          allow(api).to receive(:send_document)
+
+          send_shipment!
+
+          expect(shipment).to be_pushed
         end
       end
     end

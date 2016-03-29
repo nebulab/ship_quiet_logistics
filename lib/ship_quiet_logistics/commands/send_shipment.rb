@@ -16,6 +16,8 @@ module ShipQuietLogistics
                           config.outgoing_bucket,
                           config.outgoing_queue,
                           configs)
+
+        shipment.update(pushed: true)
       end
 
       private
