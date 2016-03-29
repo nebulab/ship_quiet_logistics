@@ -15,5 +15,14 @@ require 'ship_quiet_logistics/uploader'
 require 'ship_quiet_logistics/version'
 
 module ShipQuietLogistics
-  # Your code goes here...
+  module Commands
+    class SendShipment
+      def self.call(shipment)
+      end
+    end
+  end
+
+  def self.send_shipment(shipment)
+    Commands::SendShipment.(shipment)
+  end
 end
