@@ -19,15 +19,6 @@ require 'timecop'
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
-ShipQuietLogistics.configure do |config|
-  config.outgoing_bucket  = ENV['OUTGOING_BUCKET']
-  config.outgoing_queue   = ENV['OUTGOING_QUEUE']
-  config.business_unit    = ENV['BUSINESS_UNIT']
-  config.client_id        = ENV['CLIENT_ID']
-end
-
-AWS.config(sqs_verify_checksums: false)
-
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
