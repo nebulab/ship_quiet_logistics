@@ -13,9 +13,9 @@ require 'ffaker'
 require 'pry'
 require 'rspec/rails'
 
-Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
-
 require 'spree/testing_support/factories'
+
+Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
 ShipQuietLogistics.configure do |config|
   config.outgoing_bucket  = :outgoing_bucket
@@ -26,6 +26,10 @@ end
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+
+  config.before do
+    FactoryGirl.find_definitions
+  end
 
   config.use_transactional_fixtures = false
 end

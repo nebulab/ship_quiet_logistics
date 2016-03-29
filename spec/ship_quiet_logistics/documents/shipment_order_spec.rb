@@ -1,19 +1,26 @@
 require 'spec_helper'
 
-module ShipQuietLogistics::Documents
-  describe ShipmentOrder do
-    let(:shipment) { Factories.transfer_order_shipment }
+module ShipQuietLogistics
+  module Documents
+    describe ShipmentOrder do
+      let(:shipment) { create(:shipment) }
 
-    subject { ShipmentOrder.new(shipment, {}) }
+      subject(:document) { described_class.new(shipment, {}) }
+      subject(:xml) { Nokogiri::XML(document.to_xml) }
 
-    it 'converts to xml' do
-      xml = Nokogiri::XML(subject.to_xml)
-      xsd = Nokogiri::XML::Schema(File.read('./spec/schemas/shipment_order.xsd'))
+      it 'has the proper name' do
+        expect(document.name).to match /^_ShipmentOrder_#{shipment.number}_.*\.xml/
+      end
 
-      errors = xsd.validate(xml).collect { |error| error }
+      it 'matches the xml schema' do
+        errors = schema.validate xml
 
-      expect(subject.name).to match /^_ShipmentOrder_#{shipment['id']}_.*\.xml/
-      expect(errors).to eq []
+        expect(errors).to be_empty
+      end
+
+      def schema
+        Nokogiri::XML::Schema(File.read('./spec/schemas/shipment_order.xsd'))
+      end
     end
   end
 end
