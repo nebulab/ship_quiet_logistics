@@ -12,7 +12,6 @@ require 'database_cleaner'
 require 'ffaker'
 require 'pry'
 require 'rspec/rails'
-require 'rspec/autorun'
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
