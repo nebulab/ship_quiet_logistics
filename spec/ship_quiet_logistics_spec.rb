@@ -12,7 +12,7 @@ describe ShipQuietLogistics do
     subject(:send_shipment!) { described_class.send_shipment(shipment) }
 
     it 'sends the shipment' do
-      expect(command).to receive(:call).with(shipment).and_call_original
+      expect(command).to receive(:call).with shipment
 
       send_shipment!
     end

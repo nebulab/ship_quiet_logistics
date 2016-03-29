@@ -9,20 +9,26 @@ end
 
 require 'ship_quiet_logistics'
 require 'database_cleaner'
+require 'dotenv'
 require 'ffaker'
 require 'pry'
 require 'rspec/rails'
 
 require 'spree/testing_support/factories'
 
+Dotenv.load
+
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
 ShipQuietLogistics.configure do |config|
-  config.outgoing_bucket  = :outgoing_bucket
-  config.outgoing_queue   = :outgoing_queue
-  config.business_unit    = :business_unit
-  config.client_id        = :client_id
+  config.outgoing_bucket  = ENV['OUTGOING_BUCKET']
+  config.outgoing_queue   = ENV['OUTGOING_QUEUE']
+  config.business_unit    = ENV['BUSINESS_UNIT']
+  config.client_id        = ENV['CLIENT_ID']
 end
+
+AWS.config(access_key_id: ENV['AMAZON_ACCESS_KEY'],
+           secret_access_key: ENV['AMAZON_SECRET_KEY'])
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

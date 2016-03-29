@@ -13,11 +13,11 @@ module ShipQuietLogistics
           [
             'ShipmentOrder',
             shipment,
-            :outgoing_bucket,
-            :outgoing_queue,
+            ENV['OUTGOING_BUCKET'],
+            ENV['OUTGOING_QUEUE'],
             {
-              'client_id' => :client_id,
-              'business_unit' => :business_unit
+              'client_id' => ENV['CLIENT_ID'],
+              'business_unit' => ENV['BUSINESS_UNIT']
             }
           ]
 
