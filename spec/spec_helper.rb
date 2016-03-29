@@ -17,6 +17,12 @@ Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
 require 'spree/testing_support/factories'
 
+ShipQuietLogistics.configure do |config|
+  config.outgoing_bucket  = :outgoing_bucket
+  config.outgoing_queue   = :outgoing_queue
+  config.business_unit    = :business_unit
+  config.client_id        = :client_id
+end
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

@@ -19,4 +19,21 @@ module ShipQuietLogistics
   def self.send_shipment(shipment)
     Commands::SendShipment.(shipment)
   end
+
+  class << self
+    attr_accessor :configuration
+  end
+
+  def self.configure
+    self.configuration ||= Configuration.new
+
+    yield configuration
+  end
+
+  class Configuration
+    attr_accessor :outgoing_bucket,
+                  :outgoing_queue,
+                  :business_unit,
+                  :client_id
+  end
 end
