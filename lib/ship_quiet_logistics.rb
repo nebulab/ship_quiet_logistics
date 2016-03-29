@@ -1,7 +1,7 @@
 require 'aws-sdk'
 require 'nokogiri'
 require 'spree_core'
-require 'hushed'
+require 'gentle'
 
 require 'ship_quiet_logistics/version'
 require 'ship_quiet_logistics/engine'
@@ -26,7 +26,11 @@ module ShipQuietLogistics
   end
 
   def self.process_shipments
-    Commands::ProcessShipments.()
+    client = Gentle::Client.new(configuration.credentials)
+    blackboard = Gentle::Blackboard.new(client)
+    queue = Gentle::Queue.new(client)
+
+    Commands::ProcessShipments.(blackboard: blackboard, queue: queue)
   end
 
   class << self

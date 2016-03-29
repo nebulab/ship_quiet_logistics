@@ -5,7 +5,7 @@ module ShipQuietLogistics
     RSpec.describe ProcessShipments do
       let(:blackboard) { spy(:blackboard) }
       let(:queue) { spy(:queue) }
-      let(:message) { Hushed::Message.new }
+      let(:message) { Gentle::Message.new }
 
       subject(:process_shipments!) do
         described_class.(blackboard: blackboard, queue: queue)
@@ -50,7 +50,7 @@ module ShipQuietLogistics
       end
 
       def shipment_order_result(shipment)
-        Hushed::Documents::Response::ShipmentOrderResult.new(
+        Gentle::Documents::Response::ShipmentOrderResult.new(
           io: %(<SOResult OrderNumber="#{shipment.number}">
               <Line Line="1"/>
               <Line Line="2"/>
