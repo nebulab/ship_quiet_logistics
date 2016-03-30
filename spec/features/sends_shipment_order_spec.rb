@@ -1,13 +1,16 @@
 require 'spec_helper'
 
 RSpec.describe 'Sending shipment orders', :vcr do
-  let(:shipment) { create(:shipment, number: 'H15535307815') }
+  let(:shipment) { create(:shipment, number: 'H11111111111') }
 
   before do
-    Timecop.freeze 2016, 3, 29, 14, 14
+    allow_any_instance_of(ShipQuietLogistics::Documents::ShipmentOrder)
+      .to receive(:date_stamp) { '20160329_1010101' }
   end
 
   it 'sends the shipment' do
     ShipQuietLogistics.send_shipment(shipment)
+
+    expect(shipment.reload).to be_pushed
   end
 end

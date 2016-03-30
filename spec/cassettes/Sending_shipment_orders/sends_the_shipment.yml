@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: put
-    uri: https://test-aday-to-quiet.s3.amazonaws.com/ADAY_ShipmentOrder_H15535307815_20160329_1014000.xml
+    uri: https://test-aday-to-quiet.s3.amazonaws.com/ADAY_ShipmentOrder_H11111111111_20160329_1010101.xml
     body:
       encoding: UTF-8
       string: |
@@ -10,15 +10,15 @@ http_interactions:
         <ShipOrderDocument xmlns="http://schemas.quietlogistics.com/V2/ShipmentOrder.xsd">
           <ClientID>ADAY</ClientID>
           <BusinessUnit>ADAY</BusinessUnit>
-          <OrderHeader OrderNumber="H15535307815" OrderType="SO" OrderDate="2016-03-29T18:15:41Z">
-            <Extension>R153862122</Extension>
+          <OrderHeader OrderNumber="H11111111111" OrderType="SO" OrderDate="2016-03-30T17:09:10Z">
+            <Extension>R762997806</Extension>
             <Comments/>
-            <ShipMode Carrier="USPS" ServiceLevel="FIRST"/>
+            <ShipMode Carrier="UPS" ServiceLevel="GROUND"/>
             <ShipTo Company="Company" Contact="John Doe" Address1="10 Lovely Street" Address2="Northwest" City="Herndon" State="Alabama" PostalCode="35005" Country="United States of America"/>
             <BillTo Company="Company" Contact="John Doe" Address1="10 Lovely Street" Address2="Northwest" City="Herndon" State="Alabama" PostalCode="35005" Country="United States of America"/>
             <Notes NoteType="" NoteValue=""/>
           </OrderHeader>
-          <OrderDetails ItemNumber="SKU-1" Line="1" QuantityOrdered="1" QuantityToShip="1" UOM="EA" Price="10.0"/>
+          <OrderDetails ItemNumber="SPREE-T-SHIRT" Line="1" QuantityOrdered="1" QuantityToShip="1" UOM="EA" Price="10.0"/>
         </ShipOrderDocument>
     headers:
       Content-Type:
@@ -26,15 +26,15 @@ http_interactions:
       Accept-Encoding:
       - ''
       Content-Length:
-      - '919'
+      - '927'
       User-Agent:
       - aws-sdk-ruby/1.66.0 ruby/2.2.3 x86_64-darwin14
       Expect:
       - 100-continue
       Date:
-      - Tue, 29 Mar 2016 18:15:41 GMT
+      - Wed, 30 Mar 2016 17:09:10 GMT
       Authorization:
-      - AWS <AMAZON_ACCESS_KEY>:ZwljM4xVXuD6ybg8UehlGYIDDgI=
+      - AWS <QUIET_AWS_ACCESS_KEY>:LGLE7KAXnBopKCnSmK8EoIp02sk=
       Accept:
       - "*/*"
   response:
@@ -43,15 +43,15 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - kbN99gZtApktM2DGNWyoKmuGBwdWwDAP6WMzJgbRKFR33O+QF/Zxdp7bFKeI8IjEMsiakGDCIJA=
+      - EAOLO+MrcjzAiqJZSdlEs1xlR0CHEa08AE7yeqH22CG9IGdUyblWI6ImNr0cy7rpiuPaaLH5U68=
       X-Amz-Request-Id:
-      - AAA43DDC3DCB7731
+      - 6D26644F6E683BFE
       Date:
-      - Tue, 29 Mar 2016 18:15:43 GMT
+      - Wed, 30 Mar 2016 17:09:11 GMT
       X-Amz-Expiration:
-      - expiry-date="Wed, 13 Apr 2016 00:00:00 GMT", rule-id="NDVjZWM3MGUtNzE1NS00NGRiLTliMWYtMmEyYzdlOWE0ZTA3"
+      - expiry-date="Thu, 14 Apr 2016 00:00:00 GMT", rule-id="NDVjZWM3MGUtNzE1NS00NGRiLTliMWYtMmEyYzdlOWE0ZTA3"
       Etag:
-      - '"3a776001adcf0e4a2a01f0ea71668845"'
+      - '"bdedc0aafcadf03180b91138e4c0d5d8"'
       Content-Length:
       - '0'
       Server:
@@ -60,62 +60,13 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 29 Mar 2016 18:15:42 GMT
-- request:
-    method: post
-    uri: https://sqs.us-east-1.amazonaws.com/
-    body:
-      encoding: UTF-8
-      string: Action=GetQueueUrl&QueueName=test_aday_to_quiet&Timestamp=2016-03-29T18%3A15%3A42Z&Version=2012-11-05
-    headers:
-      Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
-      Accept-Encoding:
-      - ''
-      Content-Length:
-      - '101'
-      User-Agent:
-      - aws-sdk-ruby/1.66.0 ruby/2.2.3 x86_64-darwin14
-      Host:
-      - sqs.us-east-1.amazonaws.com
-      X-Amz-Date:
-      - 20160329T181542Z
-      X-Amz-Content-Sha256:
-      - 1c3b1a5eb1c81be530662c63436f0b3ae0e2b8aa5036ac9954e24b96f7ac58d2
-      Authorization:
-      - AWS4-HMAC-SHA256 Credential=<AMAZON_ACCESS_KEY>/20160329/us-east-1/sqs/aws4_request,
-        SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date,
-        Signature=64c2fcd5a49652a57c49ff79a4050e0f6aca72cf9687d5763d63cf1ea6b008d1
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - Server
-      Date:
-      - Tue, 29 Mar 2016 18:15:42 GMT
-      Content-Type:
-      - text/xml
-      Content-Length:
-      - '338'
-      Connection:
-      - keep-alive
-      X-Amzn-Requestid:
-      - e1015169-157a-5d5d-b510-1e1dddf46f09
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0"?><GetQueueUrlResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><GetQueueUrlResult><QueueUrl>https://sqs.us-east-1.amazonaws.com/358309981981/test_aday_to_quiet</QueueUrl></GetQueueUrlResult><ResponseMetadata><RequestId>e1015169-157a-5d5d-b510-1e1dddf46f09</RequestId></ResponseMetadata></GetQueueUrlResponse>
-    http_version: 
-  recorded_at: Tue, 29 Mar 2016 18:15:42 GMT
+  recorded_at: Wed, 30 Mar 2016 17:09:10 GMT
 - request:
     method: post
     uri: https://sqs.us-east-1.amazonaws.com/358309981981/test_aday_to_quiet
     body:
       encoding: UTF-8
-      string: Action=SendMessage&MessageBody=%3C%3Fxml%20version%3D%221.0%22%3F%3E%0A%3CEventMessage%20xmlns%3D%22http%3A%2F%2Fschemas.quietlogistics.com%2FV2%2FEventMessage.xsd%22%20ClientId%3D%22ADAY%22%20BusinessUnit%3D%22ADAY%22%20DocumentName%3D%22ADAY_ShipmentOrder_H15535307815_20160329_1415841.xml%22%20DocumentType%3D%22ShipmentOrder%22%20MessageId%3D%22438f5183-5b8c-42bb-8086-8714e55e4966%22%20Warehouse%3D%22DVN%22%20MessageDate%3D%222016-03-29T18%3A15%3A42Z%22%2F%3E%0A&QueueUrl=https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F358309981981%2Ftest_aday_to_quiet&Timestamp=2016-03-29T18%3A15%3A42Z&Version=2012-11-05
+      string: Action=SendMessage&MessageBody=%3C%3Fxml%20version%3D%221.0%22%3F%3E%0A%3CEventMessage%20xmlns%3D%22http%3A%2F%2Fschemas.quietlogistics.com%2FV2%2FEventMessage.xsd%22%20ClientId%3D%22ADAY%22%20BusinessUnit%3D%22ADAY%22%20DocumentName%3D%22ADAY_ShipmentOrder_H11111111111_20160329_1010101.xml%22%20DocumentType%3D%22ShipmentOrder%22%20MessageId%3D%223138c6f8-5c79-48b5-8344-a047e5a7b458%22%20Warehouse%3D%22DVN%22%20MessageDate%3D%222016-03-30T17%3A09%3A10Z%22%2F%3E%0A&QueueUrl=https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F358309981981%2Ftest_aday_to_quiet&Timestamp=2016-03-30T17%3A09%3A10Z&Version=2012-11-05
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
@@ -128,13 +79,13 @@ http_interactions:
       Host:
       - sqs.us-east-1.amazonaws.com
       X-Amz-Date:
-      - 20160329T181542Z
+      - 20160330T170910Z
       X-Amz-Content-Sha256:
-      - 4999744a30e2abd0fea782f62221d6a2cdc388b501927eb57aad6961e927953e
+      - b7202a183f2288a083e7c57d82ddc4158e7f825ed4358e6c60e868b70f48fe35
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=<AMAZON_ACCESS_KEY>/20160329/us-east-1/sqs/aws4_request,
+      - AWS4-HMAC-SHA256 Credential=<QUIET_AWS_ACCESS_KEY>/20160330/us-east-1/sqs/aws4_request,
         SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date,
-        Signature=081c33a58b4fe84955a2f283070e4c24ea601595dbf2e19a199325bcd8fb0cf8
+        Signature=0249e5093eee0716c7f86513c7a1f4a1c5aeae0cf04284a45cc8c2fbd057a602
       Accept:
       - "*/*"
   response:
@@ -145,7 +96,7 @@ http_interactions:
       Server:
       - Server
       Date:
-      - Tue, 29 Mar 2016 18:15:42 GMT
+      - Wed, 30 Mar 2016 17:09:11 GMT
       Content-Type:
       - text/xml
       Content-Length:
@@ -153,10 +104,10 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Requestid:
-      - 72bd349f-5f74-54cc-a422-7beb97fac1b0
+      - 22112a78-69f7-5ce0-bfff-650e6380a142
     body:
       encoding: UTF-8
-      string: <?xml version="1.0"?><SendMessageResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><SendMessageResult><MessageId>24895e98-d126-418f-a3f5-0dc776964277</MessageId><MD5OfMessageBody>8d99801943a71b101cb1aa63f03ed142</MD5OfMessageBody></SendMessageResult><ResponseMetadata><RequestId>72bd349f-5f74-54cc-a422-7beb97fac1b0</RequestId></ResponseMetadata></SendMessageResponse>
+      string: <?xml version="1.0"?><SendMessageResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><SendMessageResult><MessageId>a4794fdf-1035-4a41-83df-b586c2d5c02b</MessageId><MD5OfMessageBody>70ba4c21a5ea296f7ab4abe29abf22de</MD5OfMessageBody></SendMessageResult><ResponseMetadata><RequestId>22112a78-69f7-5ce0-bfff-650e6380a142</RequestId></ResponseMetadata></SendMessageResponse>
     http_version: 
-  recorded_at: Tue, 29 Mar 2016 18:15:42 GMT
+  recorded_at: Wed, 30 Mar 2016 17:09:11 GMT
 recorded_with: VCR 3.0.1

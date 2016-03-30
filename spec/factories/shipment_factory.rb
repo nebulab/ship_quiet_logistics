@@ -4,7 +4,14 @@ FactoryGirl.modify do
     state :ready
     association :order, factory: :order_ready_to_ship
 
-    after(:create) do |shipment, _|
+    transient do
+      sku 'SPREE-T-SHIRT'
+    end
+
+    after(:create) do |shipment, evaluator|
+      line_item = shipment.line_items.first
+      line_item.variant.update(sku: evaluator.sku)
+
       shipment.address = shipment.order.shipping_address
       shipment.save
     end

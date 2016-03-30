@@ -1,6 +1,6 @@
 FactoryGirl.modify do
   factory :base_shipping_method, class: Spree::ShippingMethod do
-    carrier 'USPS'
-    service_level 'FIRST'
+    carrier 'UPS'
+    service_level 'GROUND'
   end
 end
