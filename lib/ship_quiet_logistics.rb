@@ -51,7 +51,7 @@ module ShipQuietLogistics
                   :inventory_queue,
                   :business_unit,
                   :client_id,
-                  :process_shipment,
+                  :process_shipment_handler,
                   :error_message_handler
 
     def credentials

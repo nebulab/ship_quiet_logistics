@@ -1,5 +1,5 @@
 module ShipQuietLogistics
-  class DummyProcessShipment
+  class DummyProcessShipmentHandler
     def self.call(document)
       shipment = Spree::Shipment.find_by(number: document.order_number)
 
@@ -27,7 +27,7 @@ ShipQuietLogistics.configure do |config|
   config.client_id        = ENV['QUIET_CLIENT_ID']
 
   # This could be anything we can invoke with `.call`
-  config.process_shipment = ShipQuietLogistics::DummyProcessShipment
+  config.process_shipment_handler = ShipQuietLogistics::DummyProcessShipmentHandler
   config.error_message_handler = ShipQuietLogistics::DummyErrorMessageHandler
 end
 

@@ -17,7 +17,7 @@ module ShipQuietLogistics
           document = next_document
           next if !document || document.nil?
 
-          config.process_shipment.(document)
+          config.process_shipment_handler.(document)
         end
       end
 
