@@ -50,7 +50,8 @@ module ShipQuietLogistics
                   :incoming_queue,
                   :inventory_queue,
                   :business_unit,
-                  :client_id
+                  :client_id,
+                  :process_shipment
 
     def credentials
       {

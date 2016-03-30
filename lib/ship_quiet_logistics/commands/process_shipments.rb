@@ -17,24 +17,14 @@ module ShipQuietLogistics
           document = next_document
           next if document.nil?
 
-          update_shipment(document)
+          # we need to handle an error response
+          config.process_shipment.(document)
         end
       end
 
       private
 
       attr_reader :blackboard, :queue, :config
-
-      def update_shipment(document)
-        shipment = find_shipment(document)
-
-        shipment.ship!
-        shipment.update(tracking: document.tracking_number)
-      end
-
-      def find_shipment(document)
-        Spree::Shipment.find_by(number: document.order_number)
-      end
 
       def next_message
         queue.receive
