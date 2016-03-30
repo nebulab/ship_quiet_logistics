@@ -15,9 +15,8 @@ module ShipQuietLogistics
       def call
         messages_count.times do
           document = next_document
-          next if document.nil?
+          next if !document || document.nil?
 
-          # we need to handle an error response
           config.process_shipment.(document)
         end
       end
@@ -31,11 +30,27 @@ module ShipQuietLogistics
       end
 
       def next_document
-        blackboard.fetch(next_message)
+        message = next_message
+
+        if error_message?(message)
+          handle_error_message(message)
+        else
+          blackboard.fetch(message)
+        end
       end
 
       def messages_count
         queue.approximate_pending_messages
+      end
+
+      def error_message?(message)
+        message.instance_of? Gentle::ErrorMessage
+      end
+
+      def handle_error_message(message)
+        config.error_message_handler.(message)
+
+        nil
       end
     end
   end

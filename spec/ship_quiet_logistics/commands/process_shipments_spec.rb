@@ -49,6 +49,22 @@ module ShipQuietLogistics
         end
       end
 
+      context 'with an error response' do
+        let!(:shipment) { create(:shipment) }
+
+        let!(:message) { shipment_error_result(shipment) }
+
+        before { allow(queue).to receive(:approximate_pending_messages) { 1 } }
+
+        it 'processes all the documents' do
+          allow(queue).to receive(:receive) { message }
+          expect(blackboard).to_not receive(:fetch)
+
+          process_shipments!
+        end
+
+      end
+
       def shipment_order_result(shipment)
         Gentle::Documents::Response::ShipmentOrderResult.new(
           io: %(<SOResult OrderNumber="#{shipment.number}">
@@ -59,6 +75,20 @@ module ShipQuietLogistics
                 <Content Line="2"/>
               </Carton>
             </SOResult>))
+      end
+
+      def shipment_error_result(shipment)
+        Gentle::ErrorMessage.new(
+          xml: %(<?xml version="1.0" encoding="UTF-8"?>
+            <ErrorMessage
+              xmlns="http://schemas.quietlogistics.com/V2/EventMessageErrorResponse.xsd"
+              OriginalMessageId="ab6e7e7a-6d45-4c75-9fec-e08dba4a9c31"
+              ResponseDate="2009-09-01T12:00:00Z"
+              ClientId="GENTLE"
+              BusinessUnit="GENTLE"
+              ResultCode="1030"
+              ResultDescription="Document: Gentle_ShipmentOrder_#{shipment.number}_20160229_135723.xml - Error: An error has occured">
+            </ErrorMessage>))
       end
     end
   end

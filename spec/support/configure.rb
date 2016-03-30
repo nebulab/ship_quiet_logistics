@@ -7,6 +7,14 @@ module ShipQuietLogistics
       shipment.update(tracking: document.tracking_number)
     end
   end
+
+  class DummyErrorMessageHandler
+    def self.call(message)
+      shipment = Spree::Shipment.find_by(number: message.shipment_number)
+
+      shipment.update(pushed: false)
+    end
+  end
 end
 
 ShipQuietLogistics.configure do |config|
@@ -20,6 +28,7 @@ ShipQuietLogistics.configure do |config|
 
   # This could be anything we can invoke with `.call`
   config.process_shipment = ShipQuietLogistics::DummyProcessShipment
+  config.error_message_handler = ShipQuietLogistics::DummyErrorMessageHandler
 end
 
 AWS.config(sqs_verify_checksums: false)
