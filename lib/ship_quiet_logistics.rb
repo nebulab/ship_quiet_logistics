@@ -10,6 +10,7 @@ require 'ship_quiet_logistics/documents'
 require 'ship_quiet_logistics/commands'
 require 'ship_quiet_logistics/downloader'
 require 'ship_quiet_logistics/event_message'
+require 'ship_quiet_logistics/handlers'
 require 'ship_quiet_logistics/messages'
 require 'ship_quiet_logistics/processor'
 require 'ship_quiet_logistics/receiver'
@@ -39,6 +40,9 @@ module ShipQuietLogistics
 
   def self.configure
     self.configuration ||= Configuration.new
+
+    configuration.error_message_handler = Handlers::ErrorMessageHandler
+    configuration.process_shipment_handler = Handlers::ProcessShipmentHandler
 
     yield configuration
   end
