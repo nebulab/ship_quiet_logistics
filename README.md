@@ -20,11 +20,11 @@ Or install it yourself as:
 
     $ gem install ship_quiet_logistics
 
-Run the intall generator
+Run the install generator
 
     $ bundle exec rails g ship_quiet_logistics:install
 
-Run it's migration
+Run its migration
 
     $ bundle exec rake db:migrate
 
