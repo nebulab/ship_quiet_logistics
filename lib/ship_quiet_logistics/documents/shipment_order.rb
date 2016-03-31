@@ -1,94 +1,98 @@
 module ShipQuietLogistics
   module Documents
     class ShipmentOrder
-      attr_reader :shipment_number, :order, :shipment, :name, :unit
+      attr_reader :config, :shipment_number, :shipment, :name
 
       def initialize(shipment, config)
         @config          = config
         @shipment        = shipment
-        @shipment_number = shipment['id']
+        @shipment_number = shipment.number
         @name            = "#{@config['business_unit']}_ShipmentOrder_#{@shipment_number}_#{date_stamp}.xml"
+      end
+
+      def message
+        "Succesfully Sent Shipment #{shipment_number} to Quiet Logistics"
       end
 
       def to_xml
         builder = Nokogiri::XML::Builder.new do |xml|
           xml.ShipOrderDocument('xmlns' => 'http://schemas.quietlogistics.com/V2/ShipmentOrder.xsd') {
 
-            xml.ClientID @config['client_id']
-            xml.BusinessUnit @config['business_unit']
+            xml.ClientID config['client_id']
+            xml.BusinessUnit config['business_unit']
 
-            xml.OrderHeader('OrderNumber' => @shipment_number,
-                            'OrderType'   => @shipment['order_type'],
-                            'OrderDate'   => DateTime.now.iso8601) {
+            xml.OrderHeader('OrderNumber' => shipment_number,
+                            'OrderType'   => order_type,
+                            'OrderDate'   => shipment.order_date) {
 
-              xml.Extension shipment['order_number']
+              xml.Extension shipment.order.number
 
-              xml.Comments shipment['comments'].to_s
+              xml.Comments shipment.order.special_instructions
 
-              xml.ShipMode('Carrier'      => @shipment['carrier'],
-                           'ServiceLevel' => @shipment['service_level'])
+              xml.ShipMode('Carrier'      => shipment.carrier,
+                           'ServiceLevel' => shipment.service_level)
 
               xml.ShipTo(ship_to_hash)
               xml.BillTo(bill_to_hash)
 
-              xml.Notes('NoteType' => @shipment['note_type'].to_s, 'NoteValue' => @shipment['note_value'].to_s)
+              xml.Notes('NoteType' => shipment['note_type'].to_s,
+                        'NoteValue' => shipment['note_value'].to_s)
             }
 
-            @shipment['items'].collect do |item|
+            shipment.order.line_items.collect do |item|
               xml.OrderDetails(line_item_hash(item))
             end
           }
         end
+
         builder.to_xml
       end
 
+      private
+
       def line_item_hash(item)
         {
-          'ItemNumber'      => item["sku"],
-          'Line'            => item['line_number'],
-          'QuantityOrdered' => item['quantity'],
-          'QuantityToShip'  => item['quantity'],
+          'ItemNumber'      => item.sku,
+          'Line'            => item.id,
+          'QuantityOrdered' => item.quantity,
+          'QuantityToShip'  => item.quantity,
           'UOM'             => 'EA',
-          'Price'           => item['price']
+          'Price'           => item.price
         }
       end
 
       def ship_to_hash
         {
-          'Company'    => full_name,
-          'Contact'    => @shipment['shipping_address']['contact'],
-          'Address1'   => @shipment['shipping_address']['address1'],
-          'Address2'   => @shipment['shipping_address']['address2'],
-          'City'       => @shipment['shipping_address']['city'],
-          'State'      => @shipment['shipping_address']['state'],
-          'PostalCode' => @shipment['shipping_address']['zipcode'],
-          'Country'    => @shipment['shipping_address']['country']
+          'Company'    => shipment.ship_address.company,
+          'Contact'    => shipment.full_name,
+          'Address1'   => shipment.ship_address.address1,
+          'Address2'   => shipment.ship_address.address2,
+          'City'       => shipment.ship_address.city,
+          'State'      => shipment.ship_address.state.name,
+          'PostalCode' => shipment.ship_address.zipcode,
+          'Country'    => shipment.ship_address.country.name
         }
       end
 
       def bill_to_hash
         {
-          'Company'    => full_name,
-          'Contact'    => @shipment['billing_address']['contact'],
-          'Address1'   => @shipment['billing_address']['address1'],
-          'Address2'   => @shipment['billing_address']['address2'],
-          'City'       => @shipment['billing_address']['city'],
-          'State'      => @shipment['billing_address']['state'],
-          'PostalCode' => @shipment['billing_address']['zipcode'],
-          'Country'    => @shipment['billing_address']['country']
+          'Company'    => shipment.bill_address.company,
+          'Contact'    => shipment.full_name,
+          'Address1'   => shipment.bill_address.address1,
+          'Address2'   => shipment.bill_address.address2,
+          'City'       => shipment.bill_address.city,
+          'State'      => shipment.bill_address.state.name,
+          'PostalCode' => shipment.bill_address.zipcode,
+          'Country'    => shipment.bill_address.country.name
         }
-      end
-
-      def full_name
-        "#{shipment['shipping_address']['firstname']} #{@shipment['shipping_address']['lastname']}"
-      end
-
-      def message
-        "Succesfully Sent Shipment #{@shipment_number} to Quiet Logistics"
       end
 
       def date_stamp
         Time.now.strftime('%Y%m%d_%H%M%3N')
+      end
+
+      def order_type
+        'SO'
       end
     end
   end

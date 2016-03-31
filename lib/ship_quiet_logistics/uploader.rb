@@ -11,7 +11,7 @@ module ShipQuietLogistics
 
     private
     def upload(name, file)
-      s3 = AWS::S3.new
+      s3 = AWS::S3.new(ShipQuietLogistics.configuration.aws)
       bucket = s3.buckets[@bucket]
 
       s3_object = bucket.objects[name]

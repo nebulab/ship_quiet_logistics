@@ -5,7 +5,7 @@ module ShipQuietLogistics
     end
 
     def download(file_name)
-      s3 = AWS::S3.new
+      s3 = AWS::S3.new(ShipQuietLogistics.configuration.aws)
       bucket = s3.buckets[@bucket]
       object = bucket.objects[file_name]
 
@@ -19,7 +19,7 @@ module ShipQuietLogistics
     end
 
     def delete_file(name)
-      s3 = AWS::S3.new
+      s3 = AWS::S3.new(ShipQuietLogistics.configuration.aws)
       bucket = s3.buckets[@bucket]
       object = bucket.objects[name]
       object.delete
