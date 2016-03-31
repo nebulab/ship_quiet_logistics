@@ -69,7 +69,7 @@ Additionnaly Quiet Logistics requires a Business Unit and a Client ID
 
 ## Usage
 
-TODO: Write usage instructions here
+To encourage decoupling from what a Spree/Solidus shipment type is, it's a good idea to decorate the shipment we have into the shipment surface API this plugin expects. For guidance on this subject matter please look at the `spec/support/shipment_decorator` for a working decorator. More information on what methods are called on `shipment` can also be found by reading `lib/ship_quiet_logistics/documents/shipment_order`. Reading source code is fun!
 
 ## Development
 

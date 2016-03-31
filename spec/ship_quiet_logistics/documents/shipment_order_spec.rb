@@ -3,7 +3,7 @@ require 'spec_helper'
 module ShipQuietLogistics
   module Documents
     describe ShipmentOrder do
-      let(:shipment) { create(:shipment) }
+      let(:shipment) { decorate(create(:shipment)) }
 
       subject(:document) { described_class.new(shipment, {}) }
       subject(:xml) { Nokogiri::XML(document.to_xml) }
@@ -20,6 +20,10 @@ module ShipQuietLogistics
 
       def schema
         Nokogiri::XML::Schema(File.read('./spec/schemas/shipment_order.xsd'))
+      end
+
+      def decorate(shipment)
+        ShipmentDecorator.new(shipment)
       end
     end
   end

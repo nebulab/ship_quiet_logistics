@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe 'Sending shipment orders', :vcr do
-  let(:shipment) { create(:shipment, number: 'H11111111111') }
+  let(:shipment) { decorate(create(:shipment, number: 'H11111111111')) }
 
   before do
     allow_any_instance_of(ShipQuietLogistics::Documents::ShipmentOrder)
@@ -15,7 +15,7 @@ RSpec.describe 'Sending shipment orders', :vcr do
   end
 
   context 'an invalid shipment order' do
-    let(:shipment) { create(:shipment, number: 'H22222222222', sku: 'SKU-1') }
+    let(:shipment) { decorate(create(:shipment, number: 'H22222222222', sku: 'SKU-1')) }
 
     before do
       allow_any_instance_of(ShipQuietLogistics::Documents::ShipmentOrder)
@@ -27,5 +27,9 @@ RSpec.describe 'Sending shipment orders', :vcr do
 
       expect(shipment.reload).to be_pushed
     end
+  end
+
+  def decorate(shipment)
+    ShipmentDecorator.new(shipment)
   end
 end

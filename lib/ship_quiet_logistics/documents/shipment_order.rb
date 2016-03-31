@@ -23,14 +23,14 @@ module ShipQuietLogistics
 
             xml.OrderHeader('OrderNumber' => shipment_number,
                             'OrderType'   => order_type,
-                            'OrderDate'   => shipment.created_at.utc.iso8601) {
+                            'OrderDate'   => shipment.order_date) {
 
               xml.Extension shipment.order.number
 
               xml.Comments shipment.order.special_instructions
 
-              xml.ShipMode('Carrier'      => shipment.shipping_method.carrier,
-                           'ServiceLevel' => shipment.shipping_method.service_level)
+              xml.ShipMode('Carrier'      => shipment.carrier,
+                           'ServiceLevel' => shipment.service_level)
 
               xml.ShipTo(ship_to_hash)
               xml.BillTo(bill_to_hash)
@@ -63,40 +63,28 @@ module ShipQuietLogistics
 
       def ship_to_hash
         {
-          'Company'    => ship_address.company,
-          'Contact'    => full_name,
-          'Address1'   => ship_address.address1,
-          'Address2'   => ship_address.address2,
-          'City'       => ship_address.city,
-          'State'      => ship_address.state.name,
-          'PostalCode' => ship_address.zipcode,
-          'Country'    => ship_address.country.name
+          'Company'    => shipment.ship_address.company,
+          'Contact'    => shipment.full_name,
+          'Address1'   => shipment.ship_address.address1,
+          'Address2'   => shipment.ship_address.address2,
+          'City'       => shipment.ship_address.city,
+          'State'      => shipment.ship_address.state.name,
+          'PostalCode' => shipment.ship_address.zipcode,
+          'Country'    => shipment.ship_address.country.name
         }
       end
 
       def bill_to_hash
         {
-          'Company'    => bill_address.company,
-          'Contact'    => full_name,
-          'Address1'   => bill_address.address1,
-          'Address2'   => bill_address.address2,
-          'City'       => bill_address.city,
-          'State'      => bill_address.state.name,
-          'PostalCode' => bill_address.zipcode,
-          'Country'    => bill_address.country.name
+          'Company'    => shipment.bill_address.company,
+          'Contact'    => shipment.full_name,
+          'Address1'   => shipment.bill_address.address1,
+          'Address2'   => shipment.bill_address.address2,
+          'City'       => shipment.bill_address.city,
+          'State'      => shipment.bill_address.state.name,
+          'PostalCode' => shipment.bill_address.zipcode,
+          'Country'    => shipment.bill_address.country.name
         }
-      end
-
-      def ship_address
-        shipment.address
-      end
-
-      def bill_address
-        shipment.order.bill_address
-      end
-
-      def full_name
-        ship_address.full_name
       end
 
       def date_stamp
