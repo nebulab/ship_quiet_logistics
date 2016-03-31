@@ -18,16 +18,13 @@ require 'ship_quiet_logistics/sender'
 require 'ship_quiet_logistics/uploader'
 require 'ship_quiet_logistics/version'
 
-AWS.config(access_key_id: ENV['QUIET_AWS_ACCESS_KEY'],
-           secret_access_key: ENV['QUIET_AWS_SECRET_KEY'])
-
 module ShipQuietLogistics
   def self.send_shipment(shipment)
     Commands::SendShipment.(shipment)
   end
 
   def self.process_shipments
-    client = Gentle::Client.new(configuration.credentials)
+    client = Gentle::Client.new(configuration.gentle)
     blackboard = Gentle::Blackboard.new(client)
     queue = Gentle::Queue.new(client)
 
@@ -55,13 +52,20 @@ module ShipQuietLogistics
                   :inventory_queue,
                   :business_unit,
                   :client_id,
+                  :access_key_id,
+                  :secret_access_key,
                   :process_shipment_handler,
                   :error_message_handler
 
-    def credentials
+    def aws
       {
-        access_key_id: ENV['QUIET_AWS_ACCESS_KEY'],
-        secret_access_key: ENV['QUIET_AWS_SECRET_KEY'],
+        access_key_id: access_key_id,
+        secret_access_key: secret_access_key
+      }
+    end
+
+    def gentle
+      aws.merge \
         client_id: client_id,
         business_unit: business_unit,
         warehouse: 'ALL',
@@ -74,7 +78,6 @@ module ShipQuietLogistics
           from: incoming_queue,
           inventory: inventory_queue
         }
-      }
     end
   end
 end

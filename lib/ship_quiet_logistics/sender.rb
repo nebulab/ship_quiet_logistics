@@ -2,9 +2,10 @@ module ShipQuietLogistics
   class Sender
     attr_reader :sqs
 
-    def initialize(bucket)
-      @sqs = AWS::SQS.new
-      @queue = bucket
+    def initialize(queue)
+      @config = ShipQuietLogistics.configuration
+      @sqs = AWS::SQS.new(@config.aws)
+      @queue = queue
     end
 
     def send_message(event_message)
