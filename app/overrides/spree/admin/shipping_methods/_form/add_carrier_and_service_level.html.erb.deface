@@ -1,0 +1,10 @@
+<!-- insert_bottom '[data-hook="admin_shipping_method_form_code"]' -->
+<div class="field">
+  <%= f.label :carrier %><br />
+  <%= f.text_field :carrier %>
+</div>
+
+<div class="field">
+  <%= f.label :service_level %><br />
+  <%= f.text_field :service_level %>
+</div>
