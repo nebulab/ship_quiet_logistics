@@ -39,7 +39,7 @@ module ShipQuietLogistics
                         'NoteValue' => shipment['note_value'].to_s)
             }
 
-            shipment.order.line_items.collect do |item|
+            shipment.line_items.collect do |item|
               xml.OrderDetails(line_item_hash(item))
             end
           }

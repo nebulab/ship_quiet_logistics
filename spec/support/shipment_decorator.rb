@@ -22,4 +22,8 @@ class ShipmentDecorator < SimpleDelegator
   def ship_address
     address
   end
+
+  def line_items
+    order.line_items
+  end
 end
