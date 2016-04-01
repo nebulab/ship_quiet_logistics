@@ -30,21 +30,19 @@ Run its migration
 
 ## Configuration
 
-#### Required ENV Vars
-
-    ENV['QUIET_AWS_ACCESS_KEY'] and ENV['QUIET_AWS_SECRET_KEY']
-
 #### Required Configuration Settings
 
 ```ruby
 ShipQuietLogistics.configure do |config|
-  config.outgoing_bucket  = ENV['QUIET_OUTGOING_BUCKET']
-  config.outgoing_queue   = ENV['QUIET_OUTGOING_QUEUE']
-  config.incoming_bucket  = ENV['QUIET_INCOMING_BUCKET']
-  config.incoming_queue   = ENV['QUIET_INCOMING_QUEUE']
-  config.inventory_queue  = ENV['QUIET_INVENTORY_QUEUE']
-  config.business_unit    = ENV['QUIET_BUSINESS_UNIT']
-  config.client_id        = ENV['QUIET_CLIENT_ID']
+  config.outgoing_bucket   = ENV['QUIET_OUTGOING_BUCKET']
+  config.outgoing_queue    = ENV['QUIET_OUTGOING_QUEUE']
+  config.incoming_bucket   = ENV['QUIET_INCOMING_BUCKET']
+  config.incoming_queue    = ENV['QUIET_INCOMING_QUEUE']
+  config.inventory_queue   = ENV['QUIET_INVENTORY_QUEUE']
+  config.business_unit     = ENV['QUIET_BUSINESS_UNIT']
+  config.client_id         = ENV['QUIET_CLIENT_ID']
+  config.access_key_id     = ENV['QUIET_AWS_ACCESS_KEY']
+  config.secret_access_key = ENV['QUIET_AWS_SECRET_KEY']
 end
 ```
 
@@ -90,4 +88,3 @@ Or if the dummy app is already installed
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ship_quiet_logistics. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
