@@ -23,6 +23,10 @@ module ShipQuietLogistics
     Commands::SendShipment.(shipment)
   end
 
+  def self.send_rma(rma)
+    Commands::SendRma.(rma)
+  end
+
   def self.process_shipments
     client = Gentle::Client.new(configuration.gentle)
     blackboard = Gentle::Blackboard.new(client)
