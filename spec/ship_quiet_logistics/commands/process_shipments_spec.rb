@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module ShipQuietLogistics
   module Commands
-    RSpec.describe ProcessShipments do
+    RSpec.describe Processor do
       let(:blackboard) { spy(:blackboard) }
       let(:queue) { spy(:queue) }
       let(:message) { Gentle::Message.new }
