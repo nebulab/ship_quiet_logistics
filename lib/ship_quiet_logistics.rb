@@ -32,7 +32,7 @@ module ShipQuietLogistics
     blackboard = Gentle::Blackboard.new(client)
     queue = Gentle::Queue.new(client)
 
-    Commands::ProcessShipments.(blackboard: blackboard, queue: queue)
+    Commands::Processor.(blackboard: blackboard, queue: queue)
   end
 
   class << self

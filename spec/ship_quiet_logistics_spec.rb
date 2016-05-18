@@ -20,7 +20,7 @@ describe ShipQuietLogistics do
 
   context 'getting a shipments result' do
     let(:shipment) { double(:shipment) }
-    let(:command) { ShipQuietLogistics::Commands::ProcessShipments }
+    let(:command) { ShipQuietLogistics::Commands::Processor }
 
     subject(:process_shipments!) { described_class.process_shipments }
 
