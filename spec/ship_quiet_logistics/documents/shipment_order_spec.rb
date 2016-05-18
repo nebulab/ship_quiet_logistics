@@ -23,7 +23,7 @@ module ShipQuietLogistics
       end
 
       def decorate(shipment)
-        ShipmentDecorator.new(shipment)
+        ShipmentDecoratorStub.new(shipment)
       end
     end
   end
