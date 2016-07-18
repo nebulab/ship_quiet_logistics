@@ -6,9 +6,8 @@ module ShipQuietLogistics
       when 'ShipmentOrder'
         Documents::ShipmentOrder.new(content, config)
       when 'RMADocument'
-        Documents::RMA.new(content, config)
+        ::Gentle::Documents::Request::RMADocument.new(rma:content, config:config)
       end
-
       uploader = Uploader.new(bucket)
       uploader.process(document.name, document.to_xml)
 

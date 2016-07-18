@@ -1,6 +1,6 @@
 module ShipQuietLogistics
   module Commands
-    class ProcessShipments
+    class Processor
       def self.call(blackboard:, queue:)
         new(blackboard, queue).()
       end
@@ -11,19 +11,27 @@ module ShipQuietLogistics
 
         @config = ShipQuietLogistics.configuration
       end
-
       def call
         messages_count.times do
           document = next_document
           next if !document || document.nil?
+          case document_type document.namespace
+            when 'RMADocument'
+              config.process_rma_handler.(document)
+            when 'SOResultDocument'
+              config.process_shipment_handler.(document)
+          end
 
-          config.process_shipment_handler.(document)
         end
-      end
 
-      private
+      end
+      protected
 
       attr_reader :blackboard, :queue, :config
+
+      def document_type(namespace)
+        namespace.split('/').last.split('.').first
+      end
 
       def next_message
         queue.receive

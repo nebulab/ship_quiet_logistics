@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module ShipQuietLogistics
   module Commands
-    RSpec.describe ProcessShipments do
+    RSpec.describe Processor do
       let(:blackboard) { spy(:blackboard) }
       let(:queue) { spy(:queue) }
       let(:message) { Gentle::Message.new }
@@ -67,14 +67,16 @@ module ShipQuietLogistics
 
       def shipment_order_result(shipment)
         Gentle::Documents::Response::ShipmentOrderResult.new(
-          io: %(<SOResult OrderNumber="#{shipment.number}">
-              <Line Line="1"/>
-              <Line Line="2"/>
-              <Carton TrackingId="a-tracking-number">
-                <Content Line="1"/>
-                <Content Line="2"/>
-              </Carton>
-            </SOResult>))
+        io: %(<?xml version="1.0" encoding="utf-8"?>
+              <SOResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ClientID="ADAY" BusinessUnit="ADAY" OrderNumber="#{shipment.number}" DateShipped="2016-03-30T17:20:21.9964321Z" FreightCost="0" CartonCount="1" Warehouse="dvn" xmlns="http://schemas.quiettechnology.com/V2/SOResultDocument.xsd">
+                <Line Line="1" ItemNumber="SPREE-T-SHIRT" Quantity="1" ExceptionCode="" Tax="0" Total="0" SubstitutedItem="" />
+                <Line Line="2" ItemNumber="SPREE-SHIRT" Quantity="1" ExceptionCode="" Tax="0" Total="0" SubstitutedItem="" />
+                <Carton CartonId="S99H11111111111-1" TrackingId="a-tracking-number"" Carrier="UPS" CartonNumber="1" ServiceLevel="GROUND" Weight="1.2" FreightCost="3.05" HandlingFee="0" Surcharge="0">
+                  <Content Line="1" ItemNumber="SPREE-T-SHIRT" Quantity="1" />
+                  <Content Line="2" ItemNumber="SPREE-SHIRT" Quantity="1" />
+                </Carton>
+                <Extension>R762997806</Extension>
+              </SOResult>))
       end
 
       def shipment_error_result(shipment)
