@@ -30,6 +30,6 @@ RSpec.describe 'Sending shipment orders', :vcr do
   end
 
   def decorate(shipment)
-    ShipmentDecorator.new(shipment)
+    ShipmentDecoratorStub.new(shipment)
   end
 end

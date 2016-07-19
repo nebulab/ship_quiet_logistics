@@ -1,4 +1,4 @@
-class ShipmentDecorator < SimpleDelegator
+class ShipmentDecoratorStub < SimpleDelegator
   def bill_address
     order.bill_address
   end

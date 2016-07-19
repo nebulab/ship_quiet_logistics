@@ -23,12 +23,16 @@ module ShipQuietLogistics
     Commands::SendShipment.(shipment)
   end
 
+  def self.send_rma(rma)
+    Commands::SendRma.(rma)
+  end
+
   def self.process_shipments
     client = Gentle::Client.new(configuration.gentle)
     blackboard = Gentle::Blackboard.new(client)
     queue = Gentle::Queue.new(client)
 
-    Commands::ProcessShipments.(blackboard: blackboard, queue: queue)
+    Commands::Processor.(blackboard: blackboard, queue: queue)
   end
 
   class << self
@@ -40,6 +44,7 @@ module ShipQuietLogistics
 
     configuration.error_message_handler = Handlers::ErrorMessageHandler
     configuration.process_shipment_handler = Handlers::ProcessShipmentHandler
+    configuration.process_rma_handler = Handlers::ProcessRMAHandler
 
     yield configuration
   end
@@ -55,7 +60,8 @@ module ShipQuietLogistics
                   :access_key_id,
                   :secret_access_key,
                   :process_shipment_handler,
-                  :error_message_handler
+                  :error_message_handler,
+                  :process_rma_handler
 
     def aws
       {
