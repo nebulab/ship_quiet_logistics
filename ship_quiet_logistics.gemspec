@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'nokogiri', '~> 1.6'
   spec.add_dependency 'spree_core', '~> 2.4'
-  spec.add_dependency 'gentle', '~> 0.3'
+  spec.add_dependency 'gentle', '~> 0.3.1'
 
   spec.add_development_dependency 'bundler', '~> 1.11'
   spec.add_development_dependency 'database_cleaner', '~> 1.5'
