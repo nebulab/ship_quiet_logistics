@@ -68,9 +68,9 @@ module ShipQuietLogistics
           'Address1'   => shipment.ship_address.address1,
           'Address2'   => shipment.ship_address.address2,
           'City'       => shipment.ship_address.city,
-          'State'      => shipment.ship_address.state.name,
+          'State'      => shipment.ship_address.state_name,
           'PostalCode' => shipment.ship_address.zipcode,
-          'Country'    => shipment.ship_address.country.name
+          'Country'    => shipment.ship_address.country_name
         }
       end
 
@@ -81,9 +81,9 @@ module ShipQuietLogistics
           'Address1'   => shipment.bill_address.address1,
           'Address2'   => shipment.bill_address.address2,
           'City'       => shipment.bill_address.city,
-          'State'      => shipment.bill_address.state.name,
+          'State'      => shipment.bill_address.state_name,
           'PostalCode' => shipment.bill_address.zipcode,
-          'Country'    => shipment.bill_address.country.name
+          'Country'    => shipment.bill_address.country_name
         }
       end
 
