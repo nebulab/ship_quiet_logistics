@@ -83,6 +83,14 @@ Or if the dummy app is already installed
 
     $ bundle exec rspec spec
 
+## Setup The Tests
+
+```bash
+    $ rbenv local 2.2.3
+    $ bundle exec rake test_app
+    $ mkdir log
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ship_quiet_logistics. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
