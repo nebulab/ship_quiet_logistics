@@ -35,6 +35,10 @@ module ShipQuietLogistics
     Commands::Processor.(blackboard: blackboard, queue: queue)
   end
 
+  def self.receive_inventory_summary
+    Commands::InventorySummary.()
+  end
+
   class << self
     attr_accessor :configuration
   end
