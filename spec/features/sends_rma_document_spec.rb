@@ -4,7 +4,8 @@ RSpec.describe 'Sending RMA Documents', :vcr do
   let(:rma) { decorate(create(:return_authorization, number: 'RA368041525'))  }
 
   before do
-    allow_any_instance_of(Time).to receive(:strftime).and_return("20160718_1439282")
+    allow_any_instance_of(Gentle::Documents::Request::RMADocument)
+      .to receive(:date_stamp) { '20160718_1439282' }
   end
 
   it 'sends the document' do
