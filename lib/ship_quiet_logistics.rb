@@ -49,6 +49,7 @@ module ShipQuietLogistics
     configuration.error_message_handler = Handlers::ErrorMessageHandler
     configuration.process_shipment_handler = Handlers::ProcessShipmentHandler
     configuration.process_rma_handler = Handlers::ProcessRMAHandler
+    configuration.process_inventory_summary_handler = Handlers::ProcessInventorySummaryHandler
 
     yield configuration
   end
@@ -63,9 +64,11 @@ module ShipQuietLogistics
                   :client_id,
                   :access_key_id,
                   :secret_access_key,
-                  :process_shipment_handler,
                   :error_message_handler,
-                  :process_rma_handler
+                  :process_shipment_handler,
+                  :process_rma_handler,
+                  :process_inventory_summary_handler
+
 
     def aws
       {

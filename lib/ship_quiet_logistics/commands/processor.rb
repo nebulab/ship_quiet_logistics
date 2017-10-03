@@ -8,9 +8,9 @@ module ShipQuietLogistics
       def initialize(blackboard, queue)
         @blackboard = blackboard
         @queue = queue
-
         @config = ShipQuietLogistics.configuration
       end
+
       def call
         messages_count.times do
           document = next_document
@@ -20,11 +20,12 @@ module ShipQuietLogistics
               config.process_rma_handler.(document)
             when 'SOResultDocument'
               config.process_shipment_handler.(document)
+            when 'InventorySummary'
+              config.process_inventory_summary_handler.(document)
           end
-
         end
-
       end
+
       protected
 
       attr_reader :blackboard, :queue, :config

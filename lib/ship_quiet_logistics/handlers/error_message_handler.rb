@@ -4,7 +4,8 @@ module ShipQuietLogistics
       def self.call(message)
         shipment = Spree::Shipment.find_by(number: message.shipment_number)
 
-        shipment.update(pushed: false)
+        shipment.update(pushed: false) if shipment
+
         logger.info(message.to_xml)
       end
 
