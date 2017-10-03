@@ -35,8 +35,8 @@ module ShipQuietLogistics
     Commands::Processor.(blackboard: blackboard, queue: queue)
   end
 
-  def self.receive_inventory_summary
-    Commands::InventorySummary.()
+  def self.request_inventory_summary(warehouse_name)
+    Commands::InventorySummary.(warehouse_name)
   end
 
   class << self

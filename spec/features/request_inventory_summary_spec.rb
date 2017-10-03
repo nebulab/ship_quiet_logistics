@@ -9,7 +9,7 @@ RSpec.describe 'Receive Inventory Summary', :vcr do
   end
 
   it 'receives the results' do
-    res = ShipQuietLogistics.receive_inventory_summary
+    res = ShipQuietLogistics.request_inventory_summary('WarehouseCode')
     expect(res).to eq "Successfully Received Inventory Summary from Quiet Logistics"
   end
 end

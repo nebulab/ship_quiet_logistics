@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: put
-    uri: https://test-aday-to-quiet.s3.amazonaws.com/ADAY_InventorySummary_20170928_1439282.xml
+    uri: https://test-aday-to-quiet.s3.amazonaws.com/ADAY_InventorySummary_WarehouseCode_20170928_1439282.xml
     body:
       encoding: UTF-8
       string: |
@@ -10,7 +10,7 @@ http_interactions:
         <InventorySummaryRequest xmlns="http://schemas.quietlogistics.com/V2/InventorySummaryRequest.xsd">
           <ClientId>ADAY</ClientId>
           <BusinessUnit>ADAY</BusinessUnit>
-          <Wharehouse>ALL</Wharehouse>
+          <Wharehouse>WarehouseCode</Wharehouse>
         </InventorySummaryRequest>
     headers:
       Content-Type:
@@ -18,15 +18,15 @@ http_interactions:
       Accept-Encoding:
       - ''
       Content-Length:
-      - '243'
+      - '253'
       User-Agent:
       - aws-sdk-ruby/1.67.0 ruby/2.2.3 x86_64-darwin16
       Expect:
       - 100-continue
       Date:
-      - Thu, 28 Sep 2017 18:11:39 GMT
+      - Tue, 03 Oct 2017 19:47:23 GMT
       Authorization:
-      - AWS <QUIET_AWS_ACCESS_KEY>:BBkcjfRhej1TW7L3WyQRTVmc43g=
+      - AWS <QUIET_AWS_ACCESS_KEY>:MSYhlvQn65dvgdRydlJnC5drScU=
       Accept:
       - "*/*"
   response:
@@ -35,15 +35,15 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - 5ro8661o+n2fLcKw1xW8XbobSYYdvDqG/q59mznNcpDA/wL30Fn+78Fo7bWWMdij/3kHrxiOWF4=
+      - sBs2jB6nVOPMmjX7L4ixAFxQg+QFiXIH4hr4iUWilzpkWJsqF7aFbHC1cV2AvkQNXjz3Z+5Bh4k=
       X-Amz-Request-Id:
-      - 5D315573F104123A
+      - ABFE91E9C34198E3
       Date:
-      - Thu, 28 Sep 2017 18:11:40 GMT
+      - Tue, 03 Oct 2017 19:47:24 GMT
       X-Amz-Expiration:
-      - expiry-date="Fri, 13 Oct 2017 00:00:00 GMT", rule-id="NDVjZWM3MGUtNzE1NS00NGRiLTliMWYtMmEyYzdlOWE0ZTA3"
+      - expiry-date="Wed, 18 Oct 2017 00:00:00 GMT", rule-id="NDVjZWM3MGUtNzE1NS00NGRiLTliMWYtMmEyYzdlOWE0ZTA3"
       Etag:
-      - '"9b392a0842a000de2471566278fcd5e5"'
+      - '"08d11a3500560a0b6a3f8d9861a0c5f4"'
       Content-Length:
       - '0'
       Server:
@@ -52,32 +52,32 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 28 Sep 2017 18:11:39 GMT
+  recorded_at: Tue, 03 Oct 2017 19:47:23 GMT
 - request:
     method: post
     uri: https://sqs.us-east-1.amazonaws.com/358309981981/test_aday_to_quiet
     body:
       encoding: UTF-8
-      string: Action=SendMessage&MessageBody=%3C%3Fxml%20version%3D%221.0%22%3F%3E%0A%3CEventMessage%20xmlns%3D%22http%3A%2F%2Fschemas.quietlogistics.com%2FV2%2FEventMessage.xsd%22%20ClientId%3D%22ADAY%22%20BusinessUnit%3D%22ADAY%22%20DocumentName%3D%22ADAY_InventorySummary_20170928_1439282.xml%22%20DocumentType%3D%22InventorySummary%22%20MessageId%3D%22d6c4f607-5113-457f-ac36-bb4bdbf3b2bb%22%20Warehouse%3D%22DVN%22%20MessageDate%3D%222017-09-28T18%3A11%3A39Z%22%2F%3E%0A&QueueUrl=https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F358309981981%2Ftest_aday_to_quiet&Timestamp=2017-09-28T18%3A11%3A39Z&Version=2012-11-05
+      string: Action=SendMessage&MessageBody=%3C%3Fxml%20version%3D%221.0%22%3F%3E%0A%3CEventMessage%20xmlns%3D%22http%3A%2F%2Fschemas.quietlogistics.com%2FV2%2FEventMessage.xsd%22%20ClientId%3D%22ADAY%22%20BusinessUnit%3D%22ADAY%22%20DocumentName%3D%22ADAY_InventorySummary_WarehouseCode_20170928_1439282.xml%22%20DocumentType%3D%22InventorySummary%22%20MessageId%3D%222606a6c0-662d-4517-8cf6-85a1c4616be7%22%20Warehouse%3D%22DVN%22%20MessageDate%3D%222017-10-03T19%3A47%3A23Z%22%2F%3E%0A&QueueUrl=https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F358309981981%2Ftest_aday_to_quiet&Timestamp=2017-10-03T19%3A47%3A23Z&Version=2012-11-05
     headers:
       Content-Type:
       - application/x-www-form-urlencoded; charset=utf-8
       Accept-Encoding:
       - ''
       Content-Length:
-      - '602'
+      - '616'
       User-Agent:
       - aws-sdk-ruby/1.67.0 ruby/2.2.3 x86_64-darwin16
       Host:
       - sqs.us-east-1.amazonaws.com
       X-Amz-Date:
-      - 20170928T181139Z
+      - 20171003T194723Z
       X-Amz-Content-Sha256:
-      - b3867d2545cfd472ec44450da9815cca32bdc2c3c90317db010b80128ff53099
+      - 4eb767d810785636527328dd1de76a5c17e24bc25ddb4106ae9c044497c15e4c
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=<QUIET_AWS_ACCESS_KEY>/20170928/us-east-1/sqs/aws4_request,
+      - AWS4-HMAC-SHA256 Credential=<QUIET_AWS_ACCESS_KEY>/20171003/us-east-1/sqs/aws4_request,
         SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date,
-        Signature=0737894cd6e6305c8814318cbda0e7066e458dfc3aa439e6ed68b63ada8f786b
+        Signature=5c15bf6647f3980b7cb4250a3c3784a7529c0c5448a493786c86f733cc16e160
       Accept:
       - "*/*"
   response:
@@ -88,7 +88,7 @@ http_interactions:
       Server:
       - Server
       Date:
-      - Thu, 28 Sep 2017 18:11:40 GMT
+      - Tue, 03 Oct 2017 19:47:23 GMT
       Content-Type:
       - text/xml
       Content-Length:
@@ -96,10 +96,10 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Requestid:
-      - b72831d0-7bf1-5e7f-90f2-6397466d1089
+      - 5dfabc71-3d1c-5b70-8390-ee3cd6970304
     body:
       encoding: UTF-8
-      string: <?xml version="1.0"?><SendMessageResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><SendMessageResult><MessageId>90b0ab34-7d66-43af-bb88-f5cd7f4935eb</MessageId><MD5OfMessageBody>de88c54320deebd3e99aa20b67f175a6</MD5OfMessageBody></SendMessageResult><ResponseMetadata><RequestId>b72831d0-7bf1-5e7f-90f2-6397466d1089</RequestId></ResponseMetadata></SendMessageResponse>
+      string: <?xml version="1.0"?><SendMessageResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><SendMessageResult><MessageId>17442ea3-f3b7-4eb9-ae2d-7ac34a54fd87</MessageId><MD5OfMessageBody>3af51e45fdc7a2a6cd2aad1f50e5f476</MD5OfMessageBody></SendMessageResult><ResponseMetadata><RequestId>5dfabc71-3d1c-5b70-8390-ee3cd6970304</RequestId></ResponseMetadata></SendMessageResponse>
     http_version: 
-  recorded_at: Thu, 28 Sep 2017 18:11:40 GMT
+  recorded_at: Tue, 03 Oct 2017 19:47:24 GMT
 recorded_with: VCR 3.0.3

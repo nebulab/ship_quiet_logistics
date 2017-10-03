@@ -1,12 +1,13 @@
 module ShipQuietLogistics
   module Commands
     class InventorySummary
-      def self.call()
-        new().call
+      def self.call(warehouse_name)
+        new(warehouse_name).call
       end
 
-      def initialize
+      def initialize(warehouse_name)
         @config = ShipQuietLogistics.configuration
+        @warehouse_name = warehouse_name
       end
 
       def call
@@ -20,12 +21,13 @@ module ShipQuietLogistics
 
       private
 
-      attr_reader :config
+      attr_reader :config, :warehouse_name
 
       def configs
         {
           'client_id' => config.client_id,
-          'business_unit' => config.business_unit
+          'business_unit' => config.business_unit,
+          'warehouse' => warehouse_name
         }
       end
     end
