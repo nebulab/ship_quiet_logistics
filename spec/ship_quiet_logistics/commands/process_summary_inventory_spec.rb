@@ -11,12 +11,11 @@ module ShipQuietLogistics
         described_class.(blackboard: blackboard, queue: queue)
       end
 
-      context 'with many variants' do
-        let!(:variants) { create_list(:variant, 2) }
-
-        let!(:results) do
-          variants.map { |v| inventory_summary_result(v) }
-        end
+      context 'with one variant' do
+        let!(:variant) { create(:variant) }
+        let!(:stock_location) { variant.stock_locations.last }
+        let!(:stock_location_name) { stock_location.name }
+        let!(:results) { inventory_summary_result(stock_location_name, variant) }
 
         before { allow(queue).to receive(:approximate_pending_messages) { 2 } }
 
@@ -28,6 +27,8 @@ module ShipQuietLogistics
                                   .exactly(2).times
 
           process_inventory!
+
+          expect(count_on_hand_for(variant, stock_location_name)).to eq 5
         end
       end
 
@@ -46,10 +47,12 @@ module ShipQuietLogistics
         end
       end
 
-      def inventory_summary_result(variant)
+      private
+
+      def inventory_summary_result(stock_location_name, variant)
         ShipQuietLogistics::Documents::InventorySummaryResult.new(io:
            %(<?xml version="1.0" encoding="utf-8"?>
-          <InventorySummary xmlns="http://schemas.quietlogistics.com/V2/InventorySummary.xsd" ClientId="QUIET" BusinessUnit="QUIET" Warehouse="CORP1" >
+          <InventorySummary xmlns="http://schemas.quietlogistics.com/V2/InventorySummary.xsd" ClientId="QUIET" BusinessUnit="QUIET" Warehouse="#{stock_location_name}" >
             <Inventory ItemNumber="#{variant.sku}">
               <ItemStatus Status="Avail" Quantity="5" />
               <ItemStatus Status="RECEIVED" Quantity="1" />
@@ -73,6 +76,14 @@ module ShipQuietLogistics
               ResultCode="1030"
               ResultDescription="Document: Gentle_Inventory_Summary_20160229_135723.xml - Error: An error has occured">
             </ErrorMessage>))
+      end
+
+      def count_on_hand_for(variant, stock_location_name)
+        stock_item(variant, stock_location_name).count_on_hand
+      end
+
+      def stock_item(variant, stock_location_name)
+        Spree::StockLocation.find_by_name(stock_location_name).stock_item(variant.id)
       end
     end
   end
