@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe 'Sending RMA Documents', :vcr do
-  let(:rma) { decorate(create(:return_authorization, number: 'RA368041525'))  }
+  let(:rma) { decorate(create(:return_authorization))  }
 
   before do
     allow_any_instance_of(Gentle::Documents::Request::RMADocument)
