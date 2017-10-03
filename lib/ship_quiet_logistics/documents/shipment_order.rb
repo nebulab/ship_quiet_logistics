@@ -70,7 +70,7 @@ module ShipQuietLogistics
           'City'       => shipment.ship_address.city,
           'State'      => shipment.ship_address.state_name,
           'PostalCode' => shipment.ship_address.zipcode,
-          'Country'    => country_name(shipment.ship_address)
+          'Country'    => shipment.ship_address.country.name
         }
       end
 
@@ -83,7 +83,7 @@ module ShipQuietLogistics
           'City'       => shipment.bill_address.city,
           'State'      => shipment.bill_address.state_name,
           'PostalCode' => shipment.bill_address.zipcode,
-          'Country'    => country_name(shipment.ship_address)
+          'Country'    => shipment.bill_address.country.name
         }
       end
 
@@ -93,14 +93,6 @@ module ShipQuietLogistics
 
       def order_type
         'SO'
-      end
-
-      def country_name(address)
-        if address.respond_to?(:country_name)
-         address.country_name
-        elsif address.country.present?
-          address.country.name
-        end
       end
     end
   end
