@@ -9,7 +9,7 @@ module ShipQuietLogistics
       end
 
       def message
-        "Succesfully Receive Inventory Summary from Quiet Logistics"
+        "Successfully Received Inventory Summary from Quiet Logistics"
       end
 
       def to_xml
