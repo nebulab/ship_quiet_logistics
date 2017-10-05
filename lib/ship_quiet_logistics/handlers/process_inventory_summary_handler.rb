@@ -9,7 +9,7 @@ module ShipQuietLogistics
           sku = inventory.item_number
           quantity = inventory.quantity_available
           variant = ::Spree::Variant.find_by_sku(sku)
-          return unless variant
+          next unless variant
 
           stock_item = variant.stock_items.find_by_stock_location_id(stock_location.id)
           stock_item.set_count_on_hand(quantity.to_i)
