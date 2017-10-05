@@ -16,7 +16,6 @@ module ShipQuietLogistics
                           config.outgoing_bucket,
                           config.outgoing_queue,
                           configs)
-
       end
 
       private

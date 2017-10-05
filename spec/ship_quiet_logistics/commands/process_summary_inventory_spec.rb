@@ -74,7 +74,7 @@ module ShipQuietLogistics
               ClientId="GENTLE"
               BusinessUnit="GENTLE"
               ResultCode="1030"
-              ResultDescription="Document: Gentle_Inventory_Summary_20160229_135723.xml - Error: An error has occured">
+              ResultDescription="Document: GENTLE_InventorySummary_WARE1_20160229_135723.xml - Error: An error has occured">
             </ErrorMessage>))
       end
 
