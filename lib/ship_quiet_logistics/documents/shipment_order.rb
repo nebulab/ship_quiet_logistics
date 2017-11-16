@@ -70,7 +70,7 @@ module ShipQuietLogistics
           'City'       => shipment.ship_address.city,
           'State'      => shipment.ship_address.state_name,
           'PostalCode' => shipment.ship_address.zipcode,
-          'Country'    => shipment.ship_address.country_name
+          'Country'    => shipment.ship_address.country.name
         }
       end
 
@@ -83,7 +83,7 @@ module ShipQuietLogistics
           'City'       => shipment.bill_address.city,
           'State'      => shipment.bill_address.state_name,
           'PostalCode' => shipment.bill_address.zipcode,
-          'Country'    => shipment.bill_address.country_name
+          'Country'    => shipment.bill_address.country.name
         }
       end
 
