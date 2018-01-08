@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://schemas.quietlogistics.com/V2/InventorySummaryRequest.xsd"
+  attributeFormDefault="unqualified"
+  elementFormDefault="qualified"
+  xmlns:p1="http://schemas.quietlogistics.com/V2/InventorySummaryRequest.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.5">
+  <xs:complexType name="InventorySummaryRequestType">
+    <xs:attribute name="ClientId" type="xs:string" use="required"/>
+    <xs:attribute name="BusinessUnit" type="xs:string" use="required"/>
+    <xs:attribute name="Warehouse" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <xs:element name="InventorySummaryRequest" nillable="false" type="p1:InventorySummaryRequestType"/>
+</xs:schema>

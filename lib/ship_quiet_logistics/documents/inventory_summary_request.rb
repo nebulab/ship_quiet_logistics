@@ -14,11 +14,11 @@ module ShipQuietLogistics
 
       def to_xml
         builder = Nokogiri::XML::Builder.new do |xml|
-          xml.InventorySummaryRequest('xmlns' => 'http://schemas.quietlogistics.com/V2/InventorySummaryRequest.xsd') {
-            xml.ClientId config['client_id']
-            xml.BusinessUnit config['business_unit']
-            xml.Wharehouse config['warehouse']
-          }
+          xml.InventorySummaryRequest('xmlns' => 'http://schemas.quietlogistics.com/V2/InventorySummaryRequest.xsd',
+            'ClientId' => config['client_id'],
+            'BusinessUnit' => config['business_unit'],
+            'Wharehouse' => config['warehouse']
+          )
         end
 
         builder.to_xml
