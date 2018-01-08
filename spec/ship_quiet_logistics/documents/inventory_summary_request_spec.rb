@@ -19,7 +19,6 @@ module ShipQuietLogistics
       end
 
       it 'matches the xml schema' do
-        pending 'Fix Wharehouse not allowed'
         errors = schema.validate xml
         expect(errors).to be_empty
       end

@@ -17,7 +17,7 @@ module ShipQuietLogistics
           xml.InventorySummaryRequest('xmlns' => 'http://schemas.quietlogistics.com/V2/InventorySummaryRequest.xsd',
             'ClientId' => config['client_id'],
             'BusinessUnit' => config['business_unit'],
-            'Wharehouse' => config['warehouse']
+            'Warehouse' => config['warehouse']
           )
         end
 
