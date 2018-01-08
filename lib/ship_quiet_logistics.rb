@@ -36,7 +36,7 @@ module ShipQuietLogistics
   end
 
   def self.request_inventory_summary(warehouse_name)
-    Commands::InventorySummary.(warehouse_name)
+    Commands::InventorySummaryRequest.(warehouse_name)
   end
 
   class << self
