@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: put
-    uri: https://test-aday-to-quiet.s3.amazonaws.com/ADAY_InventorySummary_WarehouseCode_20170928_1439282.xml
+    uri: https://test-aday-to-quiet.s3.amazonaws.com/ADAY_InventorySummaryRequest_WarehouseCode_20170928_1439282.xml
     body:
       encoding: UTF-8
       string: |

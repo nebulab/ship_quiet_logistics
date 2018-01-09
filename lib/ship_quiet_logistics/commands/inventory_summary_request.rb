@@ -1,6 +1,6 @@
 module ShipQuietLogistics
   module Commands
-    class InventorySummary
+    class InventorySummaryRequest
       def self.call(warehouse_name)
         new(warehouse_name).call
       end
@@ -11,7 +11,7 @@ module ShipQuietLogistics
       end
 
       def call
-        Api.send_document('InventorySummary',
+        Api.send_document('InventorySummaryRequest',
                           nil,
                           config.outgoing_bucket,
                           config.outgoing_queue,

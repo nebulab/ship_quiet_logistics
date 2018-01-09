@@ -10,6 +10,7 @@ module ShipQuietLogistics
       @document_name = document_name
       @message_date = Time.now.utc.iso8601
       @message_id = SecureRandom.uuid
+      @warehouse = config['warehouse']
     end
 
     def to_xml
@@ -20,7 +21,7 @@ module ShipQuietLogistics
                          'DocumentName' => document_name,
                          'DocumentType' => document_type,
                          'MessageId' => message_id,
-                         'Warehouse' => 'DVN',
+                         'Warehouse' => warehouse || 'ALL',
                          'MessageDate' => message_date)
       end
       builder.to_xml
